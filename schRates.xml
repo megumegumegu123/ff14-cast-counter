@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<TriggernometryExport Version="1">
+  <ExportedFolder Id="65d2e9e0-c4c6-4ed8-b1a5-1e87bead232c" Name="Sch Rates" Enabled="true">
+    <Folders />
+    <Triggers>
+      <Trigger Enabled="true" Name="reset" Id="6a0a7037-16d8-4380-bd46-b62770c8caa1" RegularExpression="end">
+        <Actions>
+          <Action OrderNumber="1" VariableOp="UnsetRegex" VariableName="(Broil|Ed|Ruin2)" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="2" TextAuraOp="DeactivateAuraRegex" TextAuraFontSize="8.25" TextAuraName="(Spell|Broil|Ed|Ruin2)" TextAuraFontName="Microsoft Sans Serif" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="3" AuraOp="DeactivateAuraRegex" AuraName="(Broil|Ed|Ruin2|bg)" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Aura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+        </Actions>
+        <Condition Enabled="false" Grouping="Or" />
+      </Trigger>
+      <Trigger Enabled="true" Name="ruin2" Id="0de6f7d7-bf68-4e03-ae6d-9a683667a5a3" RegularExpression="15:(?&lt;playerid&gt;[A-F0-9]{8}):[a-zA-Z-' ]{3,24}:(?&lt;spellid&gt;(6509|45CE|A7|)):[a-zA-Z0-9-' ]+:[A-Z0-9]+:[a-zA-Z0-9-' ]+:[0-9]{3}(?&lt;flag&gt;[0-9])" DebugLevel="Verbose">
+        <Actions>
+          <Action OrderNumber="1" VariableOp="SetNumeric" VariableName="Ruin2Count" VariableExpression="${var:Ruin2Count}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="45CE" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="2" VariableOp="SetNumeric" VariableName="Ruin2DH" VariableExpression="${var:Ruin2DH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="2" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="45CE" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="3" VariableOp="SetNumeric" VariableName="Ruin2CH" VariableExpression="${var:Ruin2CH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="1" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="45CE" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="4" VariableOp="SetNumeric" VariableName="Ruin2CDH" VariableExpression="${var:Ruin2CDH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="45CE" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="5" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="Ruin2Counter" TextAuraExpression="${var:Ruin2Count}" TextAuraXIniExpression="${var:OverX}+60" TextAuraYIniExpression="${var:OverY}+80" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="6" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="Ruin2CHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:Ruin2Count},${var:Ruin2CH}/${var:Ruin2Count},0.0)}}" TextAuraXIniExpression="${var:OverX}+125" TextAuraYIniExpression="${var:OverY}+80" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="7" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="Ruin2DHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:Ruin2Count},${var:Ruin2DH}/${var:Ruin2Count},0.0)}}" TextAuraXIniExpression="${var:OverX}+175" TextAuraYIniExpression="${var:OverY}+80" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="8" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="Ruin2CDHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:Ruin2Count},${var:Ruin2CDH}/${var:Ruin2Count},0.0)}}" TextAuraXIniExpression="${var:OverX}+225" TextAuraYIniExpression="${var:OverY}+80" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+        </Actions>
+        <Condition Enabled="true" Grouping="Or">
+          <ConditionSingle Enabled="true" ExpressionL="${playerid}" ExpressionTypeL="String" ExpressionR="${_ffxivparty[1].id}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+        </Condition>
+      </Trigger>
+      <Trigger Enabled="true" Name="ed" Id="475f18f1-46c8-4be1-a3c4-0c88ffd327b1" RegularExpression="15:(?&lt;playerid&gt;[A-F0-9]{8}):[a-zA-Z-' ]{3,24}:(?&lt;spellid&gt;(6509|45CE|A7|)):[a-zA-Z0-9-' ]+:[A-Z0-9]+:[a-zA-Z0-9-' ]+:[0-9]{3}(?&lt;flag&gt;[0-9])" DebugLevel="Verbose">
+        <Actions>
+          <Action OrderNumber="1" VariableOp="SetNumeric" VariableName="EdCount" VariableExpression="${var:EdCount}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="A7" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="2" VariableOp="SetNumeric" VariableName="EdDH" VariableExpression="${var:EdDH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="2" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="A7" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="3" VariableOp="SetNumeric" VariableName="EdCH" VariableExpression="${var:EdCH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="1" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="A7" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="4" VariableOp="SetNumeric" VariableName="EdCDH" VariableExpression="${var:EdCDH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="A7" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+          </Action>
+          <Action OrderNumber="5" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="EdCounter" TextAuraExpression="${var:EdCount}" TextAuraXIniExpression="${var:OverX}+60" TextAuraYIniExpression="${var:OverY}+50" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="6" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="EdCHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:EdCount},${var:EdCH}/${var:EdCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+125" TextAuraYIniExpression="${var:OverY}+50" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="7" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="EdDHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:EdCount},${var:EdDH}/${var:EdCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+175" TextAuraYIniExpression="${var:OverY}+50" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="8" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="EdCDHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:EdCount},${var:EdCDH}/${var:EdCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+225" TextAuraYIniExpression="${var:OverY}+50" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+        </Actions>
+        <Condition Enabled="true" Grouping="Or">
+          <ConditionSingle Enabled="true" ExpressionL="${playerid}" ExpressionTypeL="String" ExpressionR="${_ffxivparty[1].id}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+        </Condition>
+      </Trigger>
+      <Trigger Enabled="true" Name="broil" Id="80994343-0d04-439f-b216-908646fa6cb1" RegularExpression="15:(?&lt;playerid&gt;[A-F0-9]{8}):[a-zA-Z-' ]{3,24}:(?&lt;spellid&gt;(6509|45CE|A7|)):[a-zA-Z0-9-' ]+:[A-Z0-9]+:[a-zA-Z0-9-' ]+:[0-9]{3}(?&lt;flag&gt;[0-9])" DebugLevel="Verbose">
+        <Actions>
+          <Action OrderNumber="1" VariableOp="SetNumeric" VariableName="BroilCount" VariableExpression="${var:BroilCount}+1" TextAuraFontSize="8.25" TextAuraName="F4Counter" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="Or">
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="6509" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+            <Conditions />
+          </Action>
+          <Action OrderNumber="2" VariableOp="SetNumeric" VariableName="BroilDH" VariableExpression="${var:BroilDH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="2" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="6509" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+            <Conditions />
+          </Action>
+          <Action OrderNumber="3" VariableOp="SetNumeric" VariableName="BroilCH" VariableExpression="${var:BroilCH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionGroup Enabled="true" Grouping="Or">
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="1" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              </ConditionGroup>
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="6509" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+            <Conditions />
+          </Action>
+          <Action OrderNumber="4" VariableOp="SetNumeric" VariableName="BroilCDH" VariableExpression="${var:BroilCDH}+1" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="true" Grouping="And">
+              <ConditionSingle Enabled="true" ExpressionL="${flag}" ExpressionTypeL="Numeric" ExpressionR="3" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+              <ConditionSingle Enabled="true" ExpressionL="${spellid}" ExpressionTypeL="String" ExpressionR="6509" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+            </Condition>
+            <Conditions />
+          </Action>
+          <Action OrderNumber="5" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="BroilCounter" TextAuraExpression="${var:BroilCount}" TextAuraXIniExpression="${var:OverX}+60" TextAuraYIniExpression="${var:OverY}+20" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+          <Action OrderNumber="6" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="BroilCHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:BroilCount},${var:BroilCH}/${var:BroilCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+125" TextAuraYIniExpression="${var:OverY}+20" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+          <Action OrderNumber="7" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="BroilDHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:BroilCount},${var:BroilDH}/${var:BroilCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+175" TextAuraYIniExpression="${var:OverY}+20" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+          <Action OrderNumber="8" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="BroilCDHRate" TextAuraExpression="${func:format(System.Double,&quot;0.0&quot;):${numeric:100*if(${var:BroilCount},${var:BroilCDH}/${var:BroilCount},0.0)}}" TextAuraXIniExpression="${var:OverX}+225" TextAuraYIniExpression="${var:OverY}+20" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+        </Actions>
+        <Condition Enabled="true" Grouping="Or">
+          <ConditionSingle Enabled="true" ExpressionL="${playerid}" ExpressionTypeL="String" ExpressionR="${_ffxivparty[1].id}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+        </Condition>
+      </Trigger>
+      <Trigger Enabled="true" Name="table" Id="619ef806-52e4-438e-81a8-1336854afa61" RegularExpression="15:(?&lt;playerid&gt;[A-F0-9]{8}):[a-zA-Z-' ]{3,24}:(?&lt;spellid&gt;(6509|45CE|A7|)):[a-zA-Z0-9-' ]+:[A-Z0-9]+:[a-zA-Z0-9-' ]+:[0-9]{3}(?&lt;flag&gt;[0-9])" DebugLevel="Verbose">
+        <Actions>
+          <Action OrderNumber="1" AuraImageMode="StretchImage" AuraName="bg" AuraImage="https://i.imgur.com/9XoCXxc.png" AuraXIniExpression="${var:OverX}" AuraYIniExpression="${var:OverY}" AuraWIniExpression="290" AuraHIniExpression="130" AuraOIniExpression="50" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Aura" RefireRequeue="False">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="2" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="SpellCount" TextAuraExpression="Count" TextAuraXIniExpression="${var:OverX}+60" TextAuraYIniExpression="${var:OverY}" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="3" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="SpellCrit" TextAuraExpression="CH" TextAuraXIniExpression="${var:OverX}+125" TextAuraYIniExpression="${var:OverY}" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="4" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="SpellDHit" TextAuraExpression="DH" TextAuraXIniExpression="${var:OverX}+175" TextAuraYIniExpression="${var:OverY}" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="5" TextAuraEffect="Bold" TextAuraFontSize="9.749999" TextAuraForeground="White" TextAuraName="SpellDcrit" TextAuraExpression="!!" TextAuraXIniExpression="${var:OverX}+225" TextAuraYIniExpression="${var:OverY}" TextAuraWIniExpression="40" TextAuraHIniExpression="30" TextAuraOIniExpression="100" TextAuraFontName="Minion Pro" ActionType="TextAura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="6" AuraImageMode="StretchImage" AuraName="BroilIcon" AuraImage="https://xivapi.com/i/002000/002875_hr1.png" AuraXIniExpression="${var:OverX}+15" AuraYIniExpression="${var:OverY}+23" AuraWIniExpression="24" AuraHIniExpression="24" AuraOIniExpression="100" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Aura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="7" AuraImageMode="StretchImage" AuraName="EdIcon" AuraImage="https://xivapi.com/i/000000/000514.png" AuraXIniExpression="${var:OverX}+15" AuraYIniExpression="${var:OverY}+53" AuraWIniExpression="24" AuraHIniExpression="24" AuraOIniExpression="100" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Aura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="8" AuraImageMode="StretchImage" AuraName="Ruin2Icon" AuraImage="https://xivapi.com/i/000000/000502.png" AuraXIniExpression="${var:OverX}+15" AuraYIniExpression="${var:OverY}+83" AuraWIniExpression="24" AuraHIniExpression="24" AuraOIniExpression="100" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Aura">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="9" VariableOp="SetNumeric" VariableName="OverX" VariableExpression="900" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+          <Action OrderNumber="10" VariableOp="SetNumeric" VariableName="OverY" VariableExpression="200" TextAuraFontSize="8.25" TextAuraFontName="Microsoft Sans Serif" ActionType="Variable">
+            <Condition Enabled="false" Grouping="Or" />
+          </Action>
+        </Actions>
+        <Condition Enabled="true" Grouping="Or">
+          <ConditionSingle Enabled="true" ExpressionL="${playerid}" ExpressionTypeL="String" ExpressionR="${_ffxivparty[1].id}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+        </Condition>
+      </Trigger>
+    </Triggers>
+  </ExportedFolder>
+</TriggernometryExport>
